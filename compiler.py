@@ -17,7 +17,7 @@ tmp = "".join(string)
 raw_code = list(tmp)
 print(raw_code)
 
-def char_or_not(char):
+def char_or_not(char): #숫자, 문자, 언더바 판단
     if 48 <= ord(char) <= 57 or 65 <= ord(char) <= 90 or 97 <= ord(char) <= 122 or ord(char) == 95:
         return True
     else:
@@ -113,7 +113,7 @@ def non_char_token(token, value, index, raw_code):
     else:
        return int(index + 1)
 
-
+#defining type, id, keyword
 def char_token(token, value, index, raw_code):
     character = True
     block = []
@@ -175,7 +175,7 @@ def char_token(token, value, index, raw_code):
         value.append(chunk)
         return int(tmp+1)
 
-
+#defining string
 def string_token(token, value, index, raw_code, ascii):
     ended = True
     block = []
@@ -198,7 +198,7 @@ def string_token(token, value, index, raw_code, ascii):
     value.append(chunk)
     return int(tmp + 2)
 
-
+#defining numbers like int, float
 def numeric_token(token, value, index, raw_code, ascii):
     tmp = index
     block = []
@@ -249,22 +249,22 @@ def numeric_token(token, value, index, raw_code, ascii):
 
 #logic part
 while index < len(raw_code):
-    ascii = ord(raw_code[index])
+    ascii = ord(raw_code[index]) #파악할 character를 아스키 문자로 변환
     if (40 <= ascii <= 47) or (58 <= ascii <= 62) or (123 <= ascii <= 125) or ascii == 33: #초기조건: 특수문자 판단 {ao, bo, assign o, co, terminate, lbraket, rbraket, lparen, rparen, seperating, whitespace} 구현
         index = non_char_token(token, value, index, raw_code)
-    elif ascii == 34 or ascii == 39:
+    elif ascii == 34 or ascii == 39:# 초기조건: " 나 ' 가 들어오면 string으로 받음
         index = string_token(token, value, index, raw_code, ascii)
     elif 65 <= ascii <= 90 or 97 <= ascii <= 122 or ascii == 95: #초기조건: 문자인지, 언더바 인지 판단 {type, id, keyword} 구현
         index = char_token(token, value, index, raw_code)
-    elif ascii == 45 or 48 <= ascii <= 57:
-        index = numeric_token(token, value, index, raw_code,ascii)
-    else:
+    elif ascii == 45 or 48 <= ascii <= 57: # 초기조건: -부호나 숫자 들어오면 숫자 핀별기로 들어감
+        index = numeric_token(token, value, index, raw_code, ascii)
+    else: # 정의되지 않은것이 들어오면 그냥 넘김
         index = index + 1
 
 
 
 
-
+#pandas이용해서 테이블 정리... 추후에 sytax analzer로 넘길때 csv파일로 넘길수 있음
 raw_data = {
     'token:': token,
     'value': value

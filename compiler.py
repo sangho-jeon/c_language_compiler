@@ -5,9 +5,6 @@ token = []
 value = []
 index = 0
 
-test = [" 'osdijf' "]
-
-
 # input part
 print("//press ctrl+d to compile")
 print("input source code:\n")
@@ -24,7 +21,7 @@ def char_or_not(char): #숫자, 문자, 언더바 판단
         return False
 
 
-# defining non char token as ; + - * / { } ( ) , << >> <= >= && || == !=
+# defining special char token as ; + - * / { } ( ) , << >> <= >= && || == !=
 def non_char_token(token, value, index, raw_code):
     char = raw_code[index]
     if char == ';':
@@ -54,6 +51,10 @@ def non_char_token(token, value, index, raw_code):
     elif char == ',':
         token.append("SEPERATING")
         value.append(",")
+        return int(index + 1)
+    elif char == '.':
+        if 48 <= ord(raw_code[index+1]) <= 57:
+            print("Lexical error!! float number must start with digit!")
         return int(index + 1)
     elif char == '<':
         if raw_code[index+1] == '<':

@@ -4,6 +4,7 @@ token = []
 value = []
 index = 0
 
+# input & output control part
 
 name = sys.argv[1]
 file = open(name, 'r')
@@ -19,6 +20,7 @@ line = file.readlines()
 string = "".join(line)
 raw_code = list(string)
 
+print(raw_code)
 
 
 def char_or_not(char): #숫자, 문자, 언더바 판단
@@ -104,19 +106,17 @@ def non_char_token(token, value, index, raw_code):
             value.append("!=")
             return int(index + 2)
     elif char == "&":
-        if raw_code[index+1] == "&":
-            token.append('B_O')
-            value.append("&&")
-            return int(index + 2)
+        token.append("B_O")
+        value.append("&")
+        return int(index + 1)
     elif char == "|":
-        if raw_code[index+1] == "|":
-            token.append("B_O")
-            value.append("||")
-            return int(index + 2)
+        token.append("B_O")
+        value.append("||")
+        return int(index + 1)
     # defining whitespace
     elif char == " " or char == "\t" or char == "\n":
-        #token.append("WHITESPACE")
-        #value.append(" ")
+        token.append("WHITESPACE")
+        value.append(" ")
         return int(index + 1)
     else:
        return int(index + 1)
@@ -260,10 +260,15 @@ def numeric_token(token, value, index, raw_code, ascii):
 
 
 
-#logic part
+#logic part defining character by ascii code
 while index < len(raw_code):
     ascii = ord(raw_code[index]) #파악할 character를 아스키 문자로 변환
-    if ascii == 45 or 48 <= ascii <= 57: # 초기조건: -부호나 숫자 들어오면 숫자 핀별기로 들어감
+    if raw_code[index] == " " or raw_code=="\t" or raw_code == "\n":
+        token.append("WHITESPACE")
+        value.append(raw_code[index])
+        index += 1
+
+    elif ascii == 45 or 48 <= ascii <= 57: # 초기조건: -부호나 숫자 들어오면 숫자 핀별기로 들어감
         index = numeric_token(token, value, index, raw_code, ascii)
 
     elif (40 <= ascii <= 47) or (58 <= ascii <= 62) or (123 <= ascii <= 125) or ascii == 33 or ascii == 38: #초기조건: 특수문자 판단 {ao, bo, assign o, co, terminate, lbraket, rbraket, lparen, rparen, seperating, whitespace} 구현

@@ -3,8 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="94b0ae54-7ea8-420c-919f-ce6144162f5e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Compiler_project.pdf" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/compiler.py" beforeDir="false" afterPath="$PROJECT_DIR$/compiler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/linux_env_exe/compiler" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/linux_env_exe/test.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/linux_env_exe/test.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/window_env_exe/compiler.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/window_env_exe/test.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/window_env_exe/test.out" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
